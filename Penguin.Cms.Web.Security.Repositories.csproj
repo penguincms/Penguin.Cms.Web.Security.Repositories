@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -7,28 +7,28 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>http://www.penguinms.com/Nuget</PackageProjectUrl>
     <PackageIconUrl>http://www.penguinms.com/client/images/pg.png</PackageIconUrl>
-    <Version>1.0.1</Version>
+    <Version>1.1.0</Version>
     <Description>None Available</Description>
   </PropertyGroup>
 
  <ItemGroup>
-    <None Include="..\License.txt">
+    <None Include="License.txt">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
   </ItemGroup>
 
  <ItemGroup>
-   <PackageReference Include="Penguin.Cms.Mail.Templating.Repositories" Version="1.0.3" />
-   <PackageReference Include="Penguin.Cms.Security.Repositories" Version="1.0.2" />
+   <PackageReference Include="Penguin.Cms.Mail.Templating.Repositories" Version="1.1.0" />
+   <PackageReference Include="Penguin.Cms.Security.Repositories" Version="1.1.0" />
    <PackageReference Include="Penguin.Cms.Web.Security" Version="1.0.2" />
  </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <WarningsAsErrors>NU1605, CS1591</WarningsAsErrors>
-    <DocumentationFile>C:\SVN\Framework\Nuget\Penguin.Cms.Web.Security.Repositories\Penguin.Cms.Web.Security.Repositories.xml</DocumentationFile>
+    <DocumentationFile>Penguin.Cms.Web.Security.Repositories.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebugType>full</DebugType>
-    <DocumentationFile>C:\SVN\Framework\Nuget\Penguin.Cms.Web.Security.Repositories\Penguin.Cms.Web.Security.Repositories.xml</DocumentationFile>
+    <DocumentationFile>Penguin.Cms.Web.Security.Repositories.xml</DocumentationFile>
   </PropertyGroup>
 </Project>
