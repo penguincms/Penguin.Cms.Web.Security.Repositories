@@ -7,8 +7,10 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>http://www.penguinms.com/Nuget</PackageProjectUrl>
     <PackageIconUrl>http://www.penguinms.com/client/images/pg.png</PackageIconUrl>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
     <Description>None Available</Description>
+	<IncludeSymbols>true</IncludeSymbols>
+	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
  <ItemGroup>
@@ -20,7 +22,7 @@
 
  <ItemGroup>
    <PackageReference Include="Penguin.Cms.Mail.Templating.Repositories" Version="1.1.0" />
-   <PackageReference Include="Penguin.Cms.Security.Repositories" Version="1.1.0" />
+   <PackageReference Include="Penguin.Cms.Security.Repositories" Version="1.1.1" />
    <PackageReference Include="Penguin.Cms.Web.Security" Version="1.0.2" />
  </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
