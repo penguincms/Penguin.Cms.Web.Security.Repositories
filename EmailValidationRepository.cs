@@ -1,14 +1,14 @@
 ﻿using Penguin.Cms.Mail.Templating.Repositories;
 using Penguin.Cms.Repositories;
 using Penguin.Cms.Security;
-using System.Linq;
+using Penguin.Cms.Security.Repositories;
 using Penguin.Mail.Abstractions.Attributes;
 using Penguin.Mail.Abstractions.Interfaces;
 using Penguin.Messaging.Core;
 using Penguin.Persistence.Abstractions.Interfaces;
 using System;
 using System.Collections.Generic;
-using Penguin.Cms.Security.Repositories;
+using System.Linq;
 
 namespace Penguin.Cms.Web.Security.Repositories
 {
@@ -17,8 +17,6 @@ namespace Penguin.Cms.Web.Security.Repositories
     /// </summary>
     public class EmailValidationRepository : UserAuditableEntityRepository<EmailValidationToken>, IEmailHandler
     {
-        #region Constructors
-
         /// <summary>
         /// Constructs a new instance of this repository
         /// </summary>
@@ -31,10 +29,6 @@ namespace Penguin.Cms.Web.Security.Repositories
             this.EmailTemplateRepository = emailTemplateRepository;
             this.UserRepository = this.UserRepository;
         }
-
-        #endregion Constructors
-
-        #region Methods
 
         /// <summary>
         /// Generates a validation email and sents it to the user
@@ -122,10 +116,6 @@ namespace Penguin.Cms.Web.Security.Repositories
             }
         }
 
-        #endregion Methods
-
-        #region Properties
-
         /// <summary>
         /// Email template repository for sending out validation emails
         /// </summary>
@@ -135,7 +125,5 @@ namespace Penguin.Cms.Web.Security.Repositories
         /// User repository for accessing users
         /// </summary>
         protected UserRepository UserRepository { get; set; }
-
-        #endregion Properties
     }
 }
