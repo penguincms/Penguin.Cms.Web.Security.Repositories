@@ -8,6 +8,8 @@ using Penguin.Messaging.Core;
 using Penguin.Persistence.Abstractions.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Globalization;
 using System.Linq;
 
 namespace Penguin.Cms.Web.Security.Repositories
@@ -27,7 +29,7 @@ namespace Penguin.Cms.Web.Security.Repositories
         public EmailValidationRepository(IPersistenceContext<EmailValidationToken> context, EmailTemplateRepository emailTemplateRepository, UserRepository userRepository, MessageBus messageBus = null) : base(context, messageBus)
         {
             this.EmailTemplateRepository = emailTemplateRepository;
-            this.UserRepository = this.UserRepository;
+            this.UserRepository = userRepository;
         }
 
         /// <summary>
@@ -36,18 +38,28 @@ namespace Penguin.Cms.Web.Security.Repositories
         /// <param name="user">The user to validate</param>
         /// <param name="linkUrl">Passed in value not sent. Only used for templating</param>
         [EmailHandler("Validate Email")]
-        public void GenerateEmail(User user, string linkUrl) => this.EmailTemplateRepository.GenerateEmailFromTemplate(new Dictionary<string, object>()
+        public void GenerateEmail(User user, string linkUrl)
         {
-            [nameof(user)] = user,
-            [nameof(linkUrl)] = linkUrl
-        });
+            Contract.Requires(linkUrl != null);
+
+            this.EmailTemplateRepository.GenerateEmailFromTemplate(new Dictionary<string, object>()
+            {
+                [nameof(user)] = user,
+                [nameof(linkUrl)] = linkUrl
+            });
+        }
 
         /// <summary>
         /// Generates and persists a new email token for the given user
         /// </summary>
         /// <param name="u">The user to generate a token for</param>
         /// <param name="LinkUrl">Passed in value not sent. Only used for templating</param>
-        public void GenerateToken(User u, string LinkUrl) => this.GenerateToken(u.Guid, LinkUrl);
+        public void GenerateToken(User u, string LinkUrl)
+        {
+            Contract.Requires(u != null);
+
+            this.GenerateToken(u.Guid, LinkUrl);
+        }
 
         /// <summary>
         /// Generates and persists a new email token for the given user
@@ -56,7 +68,9 @@ namespace Penguin.Cms.Web.Security.Repositories
         /// <param name="LinkUrl">Passed in value not sent. Only used for templating</param>
         public void GenerateToken(Guid userGuid, string LinkUrl)
         {
-            User thisUser = this.UserRepository.Get(userGuid);
+            Contract.Requires(!string.IsNullOrWhiteSpace(LinkUrl));
+
+            User thisUser = this.UserRepository.Find(userGuid);
 
             List<EmailValidationToken> existingTokens = this.Where(t => t.Creator == userGuid).ToList();
 
@@ -70,7 +84,7 @@ namespace Penguin.Cms.Web.Security.Repositories
                 Creator = userGuid
             };
 
-            this.GenerateEmail(thisUser, string.Format(LinkUrl, newToken.Guid));
+            this.GenerateEmail(thisUser, string.Format(CultureInfo.CurrentCulture, LinkUrl, newToken.Guid));
 
             this.Add(newToken);
         }
@@ -87,7 +101,12 @@ namespace Penguin.Cms.Web.Security.Repositories
         /// </summary>
         /// <param name="u">The user to check for</param>
         /// <returns>True if the user has validated their email</returns>
-        public bool IsValidated(User u) => this.IsValidated(u.Guid);
+        public bool IsValidated(User u)
+        {
+            Contract.Requires(u != null);
+
+            return this.IsValidated(u.Guid);
+        }
 
         /// <summary>
         /// Returns true if the user has validated their email
@@ -103,7 +122,7 @@ namespace Penguin.Cms.Web.Security.Repositories
         /// <returns>If the token is found, and valid</returns>
         public bool ValidateToken(Guid TokenId)
         {
-            EmailValidationToken thisToken = this.Get(TokenId);
+            EmailValidationToken thisToken = this.Find(TokenId);
 
             if (thisToken is null)
             {

@@ -7,7 +7,7 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/penguincms/Penguin.Cms.Web.Security.Repositories</PackageProjectUrl>
     <PackageIconUrl>http://www.penguinms.com/client/images/pg.png</PackageIconUrl>
-    <Version>1.1.2</Version>
+    <Version>2.0.0</Version>
     <Description>None Available</Description>
 	<IncludeSymbols>true</IncludeSymbols>
 	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
@@ -21,9 +21,13 @@
   </ItemGroup>
 
  <ItemGroup>
-   <PackageReference Include="Penguin.Cms.Mail.Templating.Repositories" Version="1.1.2" />
-   <PackageReference Include="Penguin.Cms.Security.Repositories" Version="1.1.1" />
-   <PackageReference Include="Penguin.Cms.Web.Security" Version="1.0.2" />
+   <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.4">
+     <PrivateAssets>all</PrivateAssets>
+     <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+   </PackageReference>
+   <PackageReference Include="Penguin.Cms.Mail.Templating.Repositories" Version="2.0.0" />
+   <PackageReference Include="Penguin.Cms.Security.Repositories" Version="2.0.0" />
+   <PackageReference Include="Penguin.Cms.Web.Security" Version="2.0.0" />
  </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <WarningsAsErrors>NU1605, CS1591</WarningsAsErrors>
