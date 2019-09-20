@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Penguin.Cms.Web.Security.Repositories</name>
+    </assembly>
+    <members>
+        <member name="T:Penguin.Cms.Web.Security.Repositories.EmailValidationRepository">
+            <summary>
+            An IRepository implementation for Email Validation tokens
+            </summary>
+        </member>
+        <member name="M:Penguin.Cms.Web.Security.Repositories.EmailValidationRepository.#ctor(Penguin.Persistence.Abstractions.Interfaces.IPersistenceContext{Penguin.Cms.Web.Security.EmailValidationToken},Penguin.Cms.Mail.Templating.Repositories.EmailTemplateRepository,Penguin.Cms.Security.Repositories.UserRepository,Penguin.Messaging.Core.MessageBus)">
+            <summary>
+            Constructs a new instance of this repository
+            </summary>
+            <param name="context">A Persistence context for Email Tokens</param>
+            <param name="emailTemplateRepository">An EmailTemplate repository</param>
+            <param name="userRepository">A User repository</param>
+            <param name="messageBus">An optional message bus for sending persistence messages</param>
+        </member>
+        <member name="M:Penguin.Cms.Web.Security.Repositories.EmailValidationRepository.GenerateEmail(Penguin.Cms.Security.User,System.String)">
+            <summary>
+            Generates a validation email and sents it to the user
+            </summary>
+            <param name="user">The user to validate</param>
+            <param name="linkUrl">Passed in value not sent. Only used for templating</param>
+        </member>
+        <member name="M:Penguin.Cms.Web.Security.Repositories.EmailValidationRepository.GenerateToken(Penguin.Cms.Security.User,System.String)">
+            <summary>
+            Generates and persists a new email token for the given user
+            </summary>
+            <param name="u">The user to generate a token for</param>
+            <param name="LinkUrl">Passed in value not sent. Only used for templating</param>
+        </member>
+        <member name="M:Penguin.Cms.Web.Security.Repositories.EmailValidationRepository.GenerateToken(System.Guid,System.String)">
+            <summary>
+            Generates and persists a new email token for the given user
+            </summary>
+            <param name="userGuid">The user to generate a token for</param>
+            <param name="LinkUrl">Passed in value not sent. Only used for templating</param>
+        </member>
+        <member name="M:Penguin.Cms.Web.Security.Repositories.EmailValidationRepository.IsTokenExpired(System.Guid)">
+            <summary>
+            Returns true if a token doesn't exist, or is expired
+            </summary>
+            <param name="TokenId">The token to check for</param>
+            <returns>True if there is a valid, unexpired token</returns>
+        </member>
+        <member name="M:Penguin.Cms.Web.Security.Repositories.EmailValidationRepository.IsValidated(Penguin.Cms.Security.User)">
+            <summary>
+            Returns true if the user has validated their email
+            </summary>
+            <param name="u">The user to check for</param>
+            <returns>True if the user has validated their email</returns>
+        </member>
+        <member name="M:Penguin.Cms.Web.Security.Repositories.EmailValidationRepository.IsValidated(System.Guid)">
+            <summary>
+            Returns true if the user has validated their email
+            </summary>
+            <param name="userGuid">The user to check for</param>
+            <returns>True if the user has validated their email</returns>
+        </member>
+        <member name="M:Penguin.Cms.Web.Security.Repositories.EmailValidationRepository.ValidateToken(System.Guid)">
+            <summary>
+            Checks to see if the token if the Token is valid
+            </summary>
+            <param name="TokenId">The Guid of the Token to check</param>
+            <returns>If the token is found, and valid</returns>
+        </member>
+        <member name="P:Penguin.Cms.Web.Security.Repositories.EmailValidationRepository.EmailTemplateRepository">
+            <summary>
+            Email template repository for sending out validation emails
+            </summary>
+        </member>
+        <member name="P:Penguin.Cms.Web.Security.Repositories.EmailValidationRepository.UserRepository">
+            <summary>
+            User repository for accessing users
+            </summary>
+        </member>
+    </members>
+</doc>
