@@ -1,5 +1,4 @@
-﻿using Penguin.Cms.Mail.Templating.Repositories;
-using Penguin.Cms.Repositories;
+﻿using Penguin.Cms.Repositories;
 using Penguin.Cms.Security;
 using Penguin.Mail.Abstractions.Attributes;
 using Penguin.Mail.Abstractions.Interfaces;
@@ -26,7 +25,7 @@ namespace Penguin.Cms.Web.Security.Repositories
         /// <param name="emailTemplateRepository">An EmailTemplate repository</param>
         /// <param name="userRepository">A User repository</param>
         /// <param name="messageBus">An optional message bus for sending persistence messages</param>
-        public EmailValidationRepository(IPersistenceContext<EmailValidationToken> context, EmailTemplateRepository emailTemplateRepository, IEntityRepository<User> userRepository, MessageBus messageBus = null) : base(context, messageBus)
+        public EmailValidationRepository(IPersistenceContext<EmailValidationToken> context, ISendTemplates emailTemplateRepository, IEntityRepository<User> userRepository, MessageBus messageBus = null) : base(context, messageBus)
         {
             this.EmailTemplateRepository = emailTemplateRepository;
             this.UserRepository = userRepository;
@@ -138,7 +137,7 @@ namespace Penguin.Cms.Web.Security.Repositories
         /// <summary>
         /// Email template repository for sending out validation emails
         /// </summary>
-        protected EmailTemplateRepository EmailTemplateRepository { get; set; }
+        protected ISendTemplates EmailTemplateRepository { get; set; }
 
         /// <summary>
         /// User repository for accessing users

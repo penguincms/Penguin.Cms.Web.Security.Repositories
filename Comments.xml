@@ -9,7 +9,7 @@
             An IRepository implementation for Email Validation tokens
             </summary>
         </member>
-        <member name="M:Penguin.Cms.Web.Security.Repositories.EmailValidationRepository.#ctor(Penguin.Persistence.Abstractions.Interfaces.IPersistenceContext{Penguin.Cms.Web.Security.EmailValidationToken},Penguin.Cms.Mail.Templating.Repositories.EmailTemplateRepository,Penguin.Persistence.Repositories.Interfaces.IEntityRepository{Penguin.Cms.Security.User},Penguin.Messaging.Core.MessageBus)">
+        <member name="M:Penguin.Cms.Web.Security.Repositories.EmailValidationRepository.#ctor(Penguin.Persistence.Abstractions.Interfaces.IPersistenceContext{Penguin.Cms.Web.Security.EmailValidationToken},Penguin.Mail.Abstractions.Interfaces.ISendTemplates,Penguin.Persistence.Repositories.Interfaces.IEntityRepository{Penguin.Cms.Security.User},Penguin.Messaging.Core.MessageBus)">
             <summary>
             Constructs a new instance of this repository
             </summary>
