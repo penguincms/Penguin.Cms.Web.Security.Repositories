@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Penguin.Cms.Web.Security.Repositories</name>
+        <name>Penguin.Cms.Web.Security.Repositories.Local</name>
     </assembly>
     <members>
         <member name="T:Penguin.Cms.Web.Security.Repositories.EmailValidationRepository">
@@ -9,7 +9,17 @@
             An IRepository implementation for Email Validation tokens
             </summary>
         </member>
-        <member name="M:Penguin.Cms.Web.Security.Repositories.EmailValidationRepository.#ctor(Penguin.Persistence.Abstractions.Interfaces.IPersistenceContext{Penguin.Cms.Web.Security.EmailValidationToken},Penguin.Mail.Abstractions.Interfaces.ISendTemplates,Penguin.Persistence.Repositories.Interfaces.IEntityRepository{Penguin.Cms.Security.User},Penguin.Messaging.Core.MessageBus)">
+        <member name="P:Penguin.Cms.Web.Security.Repositories.EmailValidationRepository.EmailTemplateRepository">
+            <summary>
+            Email template repository for sending out validation emails
+            </summary>
+        </member>
+        <member name="P:Penguin.Cms.Web.Security.Repositories.EmailValidationRepository.UserRepository">
+            <summary>
+            User repository for accessing users
+            </summary>
+        </member>
+        <member name="M:Penguin.Cms.Web.Security.Repositories.EmailValidationRepository.#ctor(Penguin.Persistence.Abstractions.Interfaces.IPersistenceContext{Penguin.Cms.Security.EmailValidationToken},Penguin.Mail.Abstractions.Interfaces.ISendTemplates,Penguin.Cms.Repositories.Interfaces.IEntityRepository{Penguin.Cms.Security.User},Penguin.Messaging.Core.MessageBus)">
             <summary>
             Constructs a new instance of this repository
             </summary>
@@ -66,16 +76,6 @@
             </summary>
             <param name="TokenId">The Guid of the Token to check</param>
             <returns>If the token is found, and valid</returns>
-        </member>
-        <member name="P:Penguin.Cms.Web.Security.Repositories.EmailValidationRepository.EmailTemplateRepository">
-            <summary>
-            Email template repository for sending out validation emails
-            </summary>
-        </member>
-        <member name="P:Penguin.Cms.Web.Security.Repositories.EmailValidationRepository.UserRepository">
-            <summary>
-            User repository for accessing users
-            </summary>
         </member>
     </members>
 </doc>

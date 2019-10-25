@@ -1,4 +1,5 @@
 ﻿using Penguin.Cms.Repositories;
+using Penguin.Cms.Repositories.Interfaces;
 using Penguin.Cms.Security;
 using Penguin.Mail.Abstractions.Attributes;
 using Penguin.Mail.Abstractions.Interfaces;
@@ -16,8 +17,18 @@ namespace Penguin.Cms.Web.Security.Repositories
     /// <summary>
     /// An IRepository implementation for Email Validation tokens
     /// </summary>
-    public class EmailValidationRepository : UserAuditableEntityRepository<EmailValidationToken>, IEmailHandler
+    public class EmailValidationRepository : AuditableEntityRepository<EmailValidationToken>, IEmailHandler
     {
+        /// <summary>
+        /// Email template repository for sending out validation emails
+        /// </summary>
+        protected ISendTemplates EmailTemplateRepository { get; set; }
+
+        /// <summary>
+        /// User repository for accessing users
+        /// </summary>
+        protected IEntityRepository<User> UserRepository { get; set; }
+
         /// <summary>
         /// Constructs a new instance of this repository
         /// </summary>
@@ -133,15 +144,5 @@ namespace Penguin.Cms.Web.Security.Repositories
                 return true;
             }
         }
-
-        /// <summary>
-        /// Email template repository for sending out validation emails
-        /// </summary>
-        protected ISendTemplates EmailTemplateRepository { get; set; }
-
-        /// <summary>
-        /// User repository for accessing users
-        /// </summary>
-        protected IEntityRepository<User> UserRepository { get; set; }
     }
 }
