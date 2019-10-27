@@ -7,8 +7,8 @@
     <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Penguin.Cms.Repositories" Version="3.0.3" />
     <PackageReference Include="Penguin.Mail.Abstractions" Version="2.0.5" />
-    <PackageReference Include="Penguin.Cms.Web.Security" Version="3.1.0-63707630128" />
+    <PackageReference Include="Penguin.Cms.Repositories" Version="3.0.3-T9LXGUJ" />
+    <PackageReference Include="Penguin.Cms.Web.Security" Version="3.1.0-T9LXGUJ" />
   </ItemGroup>
 </Project>
