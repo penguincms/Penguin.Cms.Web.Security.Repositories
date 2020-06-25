@@ -8,7 +8,15 @@
     <AssemblyName>Penguin.Cms.Web.Security.Repositories</AssemblyName>
     <RootNamespace>Penguin.Cms.Web.Security.Repositories</RootNamespace>
     <DocumentationFile>Penguin.Cms.Web.Security.Repositories.xml</DocumentationFile>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Penguin.Mail.Abstractions" Version="2.0.5" />
     <PackageReference Include="Penguin.Cms.Repositories" Version="3.0.4-T9XYC7H" />
