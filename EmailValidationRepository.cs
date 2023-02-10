@@ -5,7 +5,6 @@ using Penguin.Mail.Abstractions.Attributes;
 using Penguin.Mail.Abstractions.Interfaces;
 using Penguin.Messaging.Core;
 using Penguin.Persistence.Abstractions.Interfaces;
-using Penguin.Persistence.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -38,8 +37,8 @@ namespace Penguin.Cms.Web.Security.Repositories
         /// <param name="messageBus">An optional message bus for sending persistence messages</param>
         public EmailValidationRepository(IPersistenceContext<EmailValidationToken> context, ISendTemplates emailTemplateRepository, IEntityRepository<User> userRepository, MessageBus messageBus = null) : base(context, messageBus)
         {
-            this.EmailTemplateRepository = emailTemplateRepository;
-            this.UserRepository = userRepository;
+            EmailTemplateRepository = emailTemplateRepository;
+            UserRepository = userRepository;
         }
 
         /// <summary>
@@ -52,7 +51,7 @@ namespace Penguin.Cms.Web.Security.Repositories
         {
             Contract.Requires(linkUrl != null);
 
-            this.EmailTemplateRepository.GenerateEmailFromTemplate(new Dictionary<string, object>()
+            EmailTemplateRepository.GenerateEmailFromTemplate(new Dictionary<string, object>()
             {
                 [nameof(user)] = user,
                 [nameof(linkUrl)] = linkUrl
@@ -68,7 +67,7 @@ namespace Penguin.Cms.Web.Security.Repositories
         {
             Contract.Requires(u != null);
 
-            this.GenerateToken(u.Guid, LinkUrl);
+            GenerateToken(u.Guid, LinkUrl);
         }
 
         /// <summary>
@@ -80,7 +79,7 @@ namespace Penguin.Cms.Web.Security.Repositories
         {
             Contract.Requires(!string.IsNullOrWhiteSpace(LinkUrl));
 
-            User thisUser = this.UserRepository.Find(userGuid);
+            User thisUser = UserRepository.Find(userGuid);
 
             List<EmailValidationToken> existingTokens = this.Where(t => t.Creator == userGuid).ToList();
 
@@ -89,14 +88,14 @@ namespace Penguin.Cms.Web.Security.Repositories
                 thisToken.DateDeleted = DateTime.Now;
             }
 
-            EmailValidationToken newToken = new EmailValidationToken()
+            EmailValidationToken newToken = new()
             {
                 Creator = userGuid
             };
 
-            this.GenerateEmail(thisUser, string.Format(CultureInfo.CurrentCulture, LinkUrl, newToken.Guid));
+            GenerateEmail(thisUser, string.Format(CultureInfo.CurrentCulture, LinkUrl, newToken.Guid));
 
-            this.Add(newToken);
+            Add(newToken);
         }
 
         /// <summary>
@@ -104,7 +103,10 @@ namespace Penguin.Cms.Web.Security.Repositories
         /// </summary>
         /// <param name="TokenId">The token to check for</param>
         /// <returns>True if there is a valid, unexpired token</returns>
-        public bool IsTokenExpired(Guid TokenId) => this.Where(t => t.Guid == TokenId).FirstOrDefault()?.IsDeleted ?? true;
+        public bool IsTokenExpired(Guid TokenId)
+        {
+            return this.Where(t => t.Guid == TokenId).FirstOrDefault()?.IsDeleted ?? true;
+        }
 
         /// <summary>
         /// Returns true if the user has validated their email
@@ -115,7 +117,7 @@ namespace Penguin.Cms.Web.Security.Repositories
         {
             Contract.Requires(u != null);
 
-            return this.IsValidated(u.Guid);
+            return IsValidated(u.Guid);
         }
 
         /// <summary>
@@ -123,7 +125,10 @@ namespace Penguin.Cms.Web.Security.Repositories
         /// </summary>
         /// <param name="userGuid">The user to check for</param>
         /// <returns>True if the user has validated their email</returns>
-        public bool IsValidated(Guid userGuid) => this.Where(t => t.IsValidated && t.Creator == userGuid).Any();
+        public bool IsValidated(Guid userGuid)
+        {
+            return this.Where(t => t.IsValidated && t.Creator == userGuid).Any();
+        }
 
         /// <summary>
         /// Checks to see if the token if the Token is valid
@@ -132,7 +137,7 @@ namespace Penguin.Cms.Web.Security.Repositories
         /// <returns>If the token is found, and valid</returns>
         public bool ValidateToken(Guid TokenId)
         {
-            EmailValidationToken thisToken = this.Find(TokenId);
+            EmailValidationToken thisToken = Find(TokenId);
 
             if (thisToken is null)
             {
